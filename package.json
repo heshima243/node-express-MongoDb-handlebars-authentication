@@ -9,11 +9,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.2.1",
     "validator": "^13.9.0",
-    "main":"app.js"
-  },
-  "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
-   
+    
   }
+ 
 }
