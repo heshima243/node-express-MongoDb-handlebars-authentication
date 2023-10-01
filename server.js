@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+require("dotenv").config();
 
 const authRoutes = require('./routes/authRoutes');
 const {connectDb} = require('./services/moongoose')
@@ -11,6 +12,7 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 
 // instaciation d'express
 const app = express();
+const port = process.env.PORT || 5000
 
 // permet de leve la restrictioin de securite de handlebars pour accede au donne
 app.engine('handlebars', expressHandlebars({
@@ -48,7 +50,7 @@ app.use((req,res)=>{
 })
 
 // Port d'écoute du serveur
-const port = 3000;
+// const port = 3000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
