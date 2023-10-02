@@ -3,24 +3,11 @@ const session = require('express-session');
 require("dotenv").config();
 
 const authRoutes = require('./routes/authRoutes');
-const {connectDb} = require('./services/moongoose')
-
-
-const Handlebars = require('handlebars')
-const expressHandlebars = require('express-handlebars').engine;
-const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const { connectDb } = require('./services/moongoose');
 
 // instaciation d'express
 const app = express();
-const port = process.env.PORT || 5000
-
-// permet de leve la restrictioin de securite de handlebars pour accede au donne
-app.engine('handlebars', expressHandlebars({
-    handlebars: allowInsecurePrototypeAccess(Handlebars)
-}));
-// parametre d'acces a nos view
-app.set('view engine', 'handlebars');
-
+const port = process.env.PORT || 5000;
 
 //appel de connecxion a la base de donne
 connectDb().catch((err) => console.log(err));
@@ -28,10 +15,8 @@ connectDb().catch((err) => console.log(err));
 // Middleware pour le traitement des données de formulaire
 app.use(express.json());
 app.use(express.urlencoded({
-  extended:true
-}))
-
-
+  extended: true
+}));
 
 app.use(session({
   secret: 'your-session-secret',
@@ -39,18 +24,14 @@ app.use(session({
   saveUninitialized: true
 }));
 
-
-
-
 // Routes d'authentification
 app.use('/', authRoutes);
 
-app.use((req,res)=>{
-  res.render('./404')
-})
+app.use((req, res) => {
+  res.status(404).send('Page not found');
+});
 
 // Port d'écoute du serveur
-// const port = 3000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
