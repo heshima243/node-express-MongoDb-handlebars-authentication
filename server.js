@@ -26,10 +26,9 @@ app.use(session({
   saveUninitialized: true
 }));
 
-
-// Use the cors middleware to enable CORS for specific origins
 app.use(cors({
-  origin: 'https://inquisitive-vacherin-036997.netlify.app/' // Replace with your frontend's URL
+  origin: ['https://inquisitive-vacherin-036997.netlify.app', 'http://localhost:3000'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 }));
 
 // Routes d'authentification
