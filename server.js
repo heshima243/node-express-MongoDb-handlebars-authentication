@@ -27,7 +27,7 @@ app.use(session({
 }));
 
 app.use(cors({
-  origin: ['https://blog-jul.netlify.app/', 'http://localhost:3000'],
+  origin: ['https://blog-jul.netlify.app', 'http://localhost:3000'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 }));
 
