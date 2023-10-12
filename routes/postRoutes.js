@@ -1,9 +1,15 @@
 const express = require('express');
 const router = express.Router();
+
 const authController = require('../controllers/authController');
 const postController = require('../controllers/postController')
+
+
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../middleware/verifyToken')
+
+
+
 
 // Affichage du page d'accueille
 router.get('/',postController.getHome)
@@ -24,8 +30,6 @@ router.put('/updateList/:id',postController.putUpdateList);
 
 // delete post
 router.get("/delete/:id", postController.getDelete);
-
-
 
 
 

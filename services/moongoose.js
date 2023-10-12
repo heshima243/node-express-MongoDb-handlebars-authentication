@@ -9,7 +9,7 @@ async function connectDb() {
   await mongoose.connect(process.env.MONGO_URL);
 
 
-  console.log('BASE DE DONNE connecte');
+  console.log('data base julio connecte');
 }
 
 module.exports={

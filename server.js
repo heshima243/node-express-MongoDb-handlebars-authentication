@@ -1,25 +1,21 @@
 const express = require('express');
 const session = require('express-session');
 require("dotenv").config();
-const cors = require('cors'); // Import the cors middleware
-
-const postRoutes = require('./routes/postRoutes')
+const cors = require('cors');
+const postRoutes = require('./routes/postRoutes');
 const authRoutes = require('./routes/authRoutes');
+// const commentsRoutes = require('./routes/commentsRoutes');
+const researchRoutes = require('./routes/researchRoutes')
+
 const { connectDb } = require('./services/moongoose');
 
-// instaciation d'express
 const app = express();
 const port = process.env.PORT || 5000;
 
-//appel de connecxion a la base de donne
 connectDb().catch((err) => console.log(err));
 
-// Middleware pour le traitement des données de formulaire
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: true
-}));
-
+app.use(express.urlencoded({ extended: true }));
 app.use(session({
   secret: 'your-session-secret',
   resave: false,
@@ -27,18 +23,20 @@ app.use(session({
 }));
 
 app.use(cors({
-  origin: ['https://blog-jul.netlify.app', 'http://localhost:3000'],
+  origin: ['http://localhost:3000'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 }));
 
-// Routes d'authentification
-app.use('/', postRoutes);
+app.use('/api/posts', postRoutes);
+// app.use('/api/comments', commentsRoutes);
+
+// Votre route de recherche
+app.use('/api/recherche',researchRoutes);
 
 app.use((req, res) => {
   res.status(404).send('Page not found');
 });
 
-// Port d'écoute du serveur
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
