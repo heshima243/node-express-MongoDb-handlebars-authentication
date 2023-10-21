@@ -23,7 +23,7 @@ app.use(session({
 }));
 
 app.use(cors({
-  origin: ['https://julweb.netlify.app'],
+  origin: ['https://julweb.netlify.app','https://jul-blog.vercel.app'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 }));
 
